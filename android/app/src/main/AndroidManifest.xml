@@ -10,8 +10,11 @@
    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
    <application
+   
         android:label="app_mapas"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyA0jZ4lT2Qry0l8FhdNdr5tKw2-mrx1uNs"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

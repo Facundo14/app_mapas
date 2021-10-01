@@ -31,7 +31,7 @@ class _LoadingPageState extends State<LoadingPage> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
       if (await GeolocatorPlatform.instance.isLocationServiceEnabled()) {
-        Navigator.pushReplacement(context, navegarMapaFadeIn(context, MapaPage()));
+        Navigator.pushReplacement(context, navegarMapaFadeIn(context, const MapaPage()));
       }
     }
   }
@@ -60,7 +60,7 @@ class _LoadingPageState extends State<LoadingPage> with WidgetsBindingObserver {
     final gpsActivo = await GeolocatorPlatform.instance.isLocationServiceEnabled();
 
     if (permisoGPS && gpsActivo) {
-      Navigator.pushReplacement(context, navegarMapaFadeIn(context, MapaPage()));
+      Navigator.pushReplacement(context, navegarMapaFadeIn(context, const MapaPage()));
       return '';
     } else if (!permisoGPS) {
       Navigator.pushReplacement(context, navegarMapaFadeIn(context, const AccesoGpsPage()));
