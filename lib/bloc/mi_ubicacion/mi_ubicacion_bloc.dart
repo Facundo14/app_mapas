@@ -21,7 +21,9 @@ class MiUbicacionBloc extends Bloc<MiUbicacionEvent, MiUbicacionState> {
     )
         .listen((Position position) {
       final nuevaUbicacion = LatLng(position.latitude, position.longitude);
-      add(OnUbicacionCambio(ubicacion: nuevaUbicacion));
+      add(OnUbicacionCambio(
+        ubicacion: nuevaUbicacion,
+      ));
     });
   }
 

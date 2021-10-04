@@ -37,6 +37,8 @@ class _MapaPageState extends State<MapaPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: const [
           BtnUbicacion(),
+          BtnSeguirRuta(),
+          BtnMiRuta(),
         ],
       ),
     );
@@ -46,6 +48,7 @@ class _MapaPageState extends State<MapaPage> {
     if (!state.existeUbicacion) return const Center(child: CircularProgressIndicator());
 
     final mapaBloc = BlocProvider.of<MapaBloc>(context);
+    mapaBloc.add(OnUbicacionCambioMapa(ubicacion: state.ubicacion!));
     final cameraPosition = CameraPosition(
       target: state.ubicacion!,
       zoom: 15,
@@ -57,6 +60,11 @@ class _MapaPageState extends State<MapaPage> {
       zoomControlsEnabled: false,
       //onMapCreated: (GoogleMapController controller) => mapaBloc.initMapa(controller),
       onMapCreated: mapaBloc.initMapa,
+      polylines: mapaBloc.state.polylines.values.toSet(),
+      onCameraMove: (cameraPosition) {
+        // cameraPosition.target = LatLng central del mapa
+        mapaBloc.add(OnMovioMapa(centroMapa: cameraPosition.target));
+      },
     );
   }
 }
