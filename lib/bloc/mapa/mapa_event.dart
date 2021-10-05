@@ -15,6 +15,18 @@ class OnMarcarRutaMapa extends MapaEvent {}
 
 class OnSeguirUbicacionMapa extends MapaEvent {}
 
+class OnCrearRutaInicioDestinoMapa extends MapaEvent {
+  final List<LatLng> rutasCoordenadas;
+  final double distancia;
+  final double duracion;
+
+  OnCrearRutaInicioDestinoMapa({
+    rutasCoordenadas,
+    this.distancia = 0.0,
+    this.duracion = 0.0,
+  }) : rutasCoordenadas = rutasCoordenadas ?? [];
+}
+
 class OnMovioMapa extends MapaEvent {
   final LatLng centroMapa;
 

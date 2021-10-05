@@ -12,6 +12,8 @@ class MiUbicacionBloc extends Bloc<MiUbicacionEvent, MiUbicacionState> {
   MiUbicacionBloc() : super(const MiUbicacionState()) {
     on<OnUbicacionCambio>(_onUbicacionCambio);
   }
+  // Geolocator
+  final _geolocator = Geolocator();
   StreamSubscription<Position>? _positionSubscription;
   void iniciarSeguimiento() {
     _positionSubscription = GeolocatorPlatform.instance
