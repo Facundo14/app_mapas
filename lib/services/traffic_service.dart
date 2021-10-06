@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:app_mapas/helpers/debouncer.dart';
+import 'package:app_mapas/models/reverse_query_response.dart';
 import 'package:app_mapas/models/search_respose.dart';
 import 'package:dio/dio.dart';
 import 'package:app_mapas/models/traffic_response.dart';
@@ -73,5 +74,23 @@ class TrafficService {
     });
 
     Future.delayed(const Duration(milliseconds: 201)).then((_) => timer.cancel());
+  }
+
+  Future<ReverseQueryResponse> getCoordenadasInfo(LatLng destinoCoords) async {
+    final url = '$_baseUrlGeo/mapbox.places/${destinoCoords.longitude},${destinoCoords.latitude}.json';
+
+    try {
+      final resp = await _dio.get(
+        url,
+        queryParameters: {
+          'access_token': _apiKey,
+          'language': 'es',
+        },
+      );
+      final reversequeryesponse = reverseQueryResponseFromJson(resp.data);
+      return reversequeryesponse;
+    } catch (e) {
+      return ReverseQueryResponse(features: []);
+    }
   }
 }

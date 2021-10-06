@@ -1,3 +1,4 @@
+import 'package:app_mapas/pages/test_marker_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           'mapa': (_) => const MapaPage(),
           'loading': (_) => const LoadingPage(),
           'acceso_gps': (_) => const AccesoGpsPage(),
+          'test_marker': (_) => const TestMarkerPage(),
         },
       ),
     );

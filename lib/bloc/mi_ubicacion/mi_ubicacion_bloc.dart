@@ -29,7 +29,8 @@ class MiUbicacionBloc extends Bloc<MiUbicacionEvent, MiUbicacionState> {
   }
 
   void cancelarSeguimiento() {
-    _positionSubscription?.cancel();
+    
+    _positionSubscription!.cancel();
   }
 
   void _onUbicacionCambio(OnUbicacionCambio event, Emitter<MiUbicacionState> emit) {

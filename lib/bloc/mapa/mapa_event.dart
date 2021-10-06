@@ -19,11 +19,13 @@ class OnCrearRutaInicioDestinoMapa extends MapaEvent {
   final List<LatLng> rutasCoordenadas;
   final double distancia;
   final double duracion;
+  final String nombreDestino;
 
   OnCrearRutaInicioDestinoMapa({
     rutasCoordenadas,
     this.distancia = 0.0,
     this.duracion = 0.0,
+    this.nombreDestino = '',
   }) : rutasCoordenadas = rutasCoordenadas ?? [];
 }
 

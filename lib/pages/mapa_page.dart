@@ -23,6 +23,7 @@ class _MapaPageState extends State<MapaPage> {
 
   @override
   void dispose() {
+    WidgetsFlutterBinding.ensureInitialized();
     BlocProvider.of<MiUbicacionBloc>(context).cancelarSeguimiento();
     super.dispose();
   }
@@ -36,8 +37,6 @@ class _MapaPageState extends State<MapaPage> {
           BlocBuilder<MiUbicacionBloc, MiUbicacionState>(
             builder: (_, MiUbicacionState state) => crearMapa(state),
           ),
-
-          //TODO: hacer el toggle cuando estoy manualmente
           Positioned(top: size.height * 0.01, child: const SearchBar()),
           const MarcadorManual(),
         ],
@@ -57,9 +56,9 @@ class _MapaPageState extends State<MapaPage> {
     if (!state.existeUbicacion) return const Center(child: CircularProgressIndicator());
 
     final mapaBloc = BlocProvider.of<MapaBloc>(context);
-    mapaBloc.add(OnUbicacionCambioMapa(ubicacion: state.ubicacion!));
+    mapaBloc.add(OnUbicacionCambioMapa(ubicacion: state.ubicacion));
     final cameraPosition = CameraPosition(
-      target: state.ubicacion!,
+      target: state.ubicacion,
       zoom: 15,
     );
 
@@ -73,6 +72,7 @@ class _MapaPageState extends State<MapaPage> {
           //onMapCreated: (GoogleMapController controller) => mapaBloc.initMapa(controller),
           onMapCreated: mapaBloc.initMapa,
           polylines: mapaBloc.state.polylines.values.toSet(),
+          markers: mapaBloc.state.markers.values.toSet(),
           onCameraMove: (cameraPosition) {
             // cameraPosition.target = LatLng central del mapa
             mapaBloc.add(OnMovioMapa(centroMapa: cameraPosition.target));

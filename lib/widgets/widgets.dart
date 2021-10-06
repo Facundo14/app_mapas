@@ -1,4 +1,3 @@
-import 'package:app_mapas/models/search_respose.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
